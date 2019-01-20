@@ -1,18 +1,8 @@
-from enum import Enum
-
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.serializers import serialize
 
 User = get_user_model()
-
-# enums
-
-
-class LetterStatus(Enum):
-    DRAFT = "Draft"
-    SENT = "Sent"
-    READ = "Read"
 
 # models
 
@@ -27,15 +17,23 @@ class LetterManager(models.Manager):
 
 
 class Letter(models.Model):
-    sender = models.ForeignKey(
-        User, on_delete=models.PROTECT)
-    recipient = models.ForeignKey(
-        User, on_delete=models.PROTECT)
-    status = models.CharField(
-        max_length=2,
-        choices=[(s, s.value) for s in LetterStatus],
-        default=LetterStatus.DRAFT
+    # status choices
+    DRAFT_STATUS = 0
+    SENT_STATUS = 1
+    READ_STATUS = 2
+
+    STATUS_CHOICES = (
+        (DRAFT_STATUS, 'Draft'),
+        (SENT_STATUS, 'Sent'),
+        (READ_STATUS, 'Read'),
     )
+
+    # model
+    sender = models.ForeignKey(
+        User, on_delete=models.PROTECT, related_name="+")
+    recipient = models.ForeignKey(
+        User, on_delete=models.PROTECT, related_name="+")
+    status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT_STATUS)
     content = models.TextField()
 
     created_on = models.DateTimeField(auto_now_add=True)

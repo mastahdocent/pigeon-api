@@ -17,7 +17,6 @@ class Migration(migrations.Migration):
             name='Letter',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('status', models.CharField(choices=[(api.letters.models.LetterStatus('Draft'), 'Draft'), (api.letters.models.LetterStatus('Sent'), 'Sent'), (api.letters.models.LetterStatus('Read'), 'Read')], default=api.letters.models.LetterStatus('Draft'), max_length=2)),
                 ('content', models.TextField()),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('sent_on', models.DateTimeField(blank=True, null=True)),
