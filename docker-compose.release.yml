@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    build: 
+      args:
+        mode: release
+    environment:
+      - MYSQL_HOST=dev03x.xenium.pl
+      - MYSQL_USER=pigeon
+      - MYSQL_PASSWORD=##pigeon1

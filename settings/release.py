@@ -11,9 +11,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pigeon',
-        'USER': 'pigeon',
-        'PASSWORD': '##pigeon1',  # for testing purposes only
-        'HOST': 'dev03x.xenium.pl',
+        'USER': os.environ.get('MYSQL_USER'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+        'HOST': os.environ.get('MYSQL_HOST'),
         'PORT': '3306',
     }
 }
