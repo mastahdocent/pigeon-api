@@ -2,8 +2,14 @@ version: '3'
 
 services:
   web:
-    build: .
+    build: 
+      context: .
+      args:
+        mode: develop
     container_name: pigeon-api
+    environment:
+      - MYSQL_DATABASE=xxx 
+      - MYSQL_PASSWORD=xxx
     volumes:
       - .:/pigeon-api
     ports:
