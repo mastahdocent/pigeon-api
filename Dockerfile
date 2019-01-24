@@ -3,7 +3,7 @@ FROM python:latest
 ENV PYTHONUNBUFFERED 1
 
 ARG mode=develop
-ENV DJANGO_SETTINGS_MODULE=pigeon.settings.$mode
+ENV DJANGO_SETTINGS_MODULE=settings.$mode
 
 RUN mkdir /pigeon-api
 WORKDIR /pigeon-api
