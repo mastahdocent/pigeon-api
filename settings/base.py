@@ -22,11 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '%=xg*1x^$*f=pb2#a4)xo5#bgb^%=!l)kwfk-74uri(vv-rpoc'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -74,28 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pigeon.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pigeon',
-        'USER': 'pigeon',
-        'PASSWORD': '##pigeon1', # for testing purposes only
-        'HOST': 'dev03x.xenium.pl',   
-        'PORT': '3306',
-    }
-}
 
 
 # Password validation
