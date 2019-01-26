@@ -1,6 +1,5 @@
-from django.db.models import Q
 from django.utils import timezone
-from rest_framework import generics, pagination
+from rest_framework import generics
 
 from .models import Letter
 from .permissions import IsLetterRecipient, IsLetterSender, IsLetterSenderOrRecipient
