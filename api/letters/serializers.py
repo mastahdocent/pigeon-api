@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from .models import Letter
-
+from ..serializers import UserSerializer
 
 class LetterSerializer(serializers.ModelSerializer):
-
+    sender = UserSerializer(read_only=True)
+    #recipient = UserSerializer(read_only=True) #todo: what about writing?
     class Meta:
         model = Letter
         fields = [

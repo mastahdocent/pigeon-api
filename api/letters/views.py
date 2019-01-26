@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.utils import timezone
-from rest_framework import generics
+from rest_framework import generics, pagination
 
 from .models import Letter
 from .permissions import IsLetterRecipient, IsLetterSender, IsLetterSenderOrRecipient
@@ -9,6 +9,8 @@ from .serializers import LetterSerializer
 
 class LettersView(generics.ListCreateAPIView):
     serializer_class = LetterSerializer
+    search_fields = ('recipient__username', 'content')
+    ordering_fields = ('recipient__username', 'created_on', 'sent_on')
 
     def get_queryset(self):
         # todo: reuse this qs
