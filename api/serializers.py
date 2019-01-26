@@ -22,3 +22,15 @@ class UserSerializer(serializers.ModelSerializer):
             'last_login',
             'date_joined'
         ]
+
+class UserStubSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = [
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'avatar'
+        ]
+        read_only_fields = fields

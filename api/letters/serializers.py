@@ -1,10 +1,8 @@
 from rest_framework import serializers
 from .models import Letter
-from ..serializers import UserSerializer
+from ..serializers import UserStubSerializer
 
 class LetterSerializer(serializers.ModelSerializer):
-    sender = UserSerializer(read_only=True)
-    #recipient = UserSerializer(read_only=True) #todo: what about writing?
     class Meta:
         model = Letter
         fields = [
@@ -49,3 +47,7 @@ class LetterSerializer(serializers.ModelSerializer):
                         "Selected status is not allowed in current object state")
 
         return value
+
+class LetterGetSerializer(LetterSerializer):
+    sender = UserStubSerializer(read_only=True)
+    recipient = UserStubSerializer(read_only=True)

@@ -4,11 +4,10 @@ from rest_framework import generics, pagination
 
 from .models import Letter
 from .permissions import IsLetterRecipient, IsLetterSender, IsLetterSenderOrRecipient
-from .serializers import LetterSerializer
+from .serializers import LetterSerializer, LetterGetSerializer
 
 
 class LettersView(generics.ListCreateAPIView):
-    serializer_class = LetterSerializer
     search_fields = ('recipient__username', 'content')
     ordering_fields = ('recipient__username', 'created_on', 'sent_on')
 
@@ -17,6 +16,12 @@ class LettersView(generics.ListCreateAPIView):
 
     def get_serializer_context(self):
         return {'request': self.request}
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return LetterGetSerializer
+        else:
+            return LetterSerializer
 
     def perform_create(self, serializer):
         # authenticated user can only send letters on his own behalf
@@ -30,7 +35,6 @@ class LetterItemView(generics.RetrieveUpdateDestroyAPIView):
         IsLetterRecipient
     ]
 
-    serializer_class = LetterSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
@@ -38,6 +42,12 @@ class LetterItemView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_serializer_context(self):
         return {'request': self.request}
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return LetterGetSerializer
+        else:
+            return LetterSerializer
 
     def perform_destroy(self, instance):
         if self.request.user == instance.sender:
