@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from api.views import UsersView, UserItemView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('api.auth.urls')),
-    path('letters/', include('api.letters.urls'))
+    path('letters/', include('api.letters.urls')),
+    path('users/', UsersView.as_view()),
+    path('users/<int:id>/', UserItemView.as_view())
 ]

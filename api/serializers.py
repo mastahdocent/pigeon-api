@@ -7,5 +7,18 @@ class UserSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = [
             'id',
-            'username'
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'avatar',
+            'last_login',
+            'date_joined'
+        ]
+        read_only_fields = [
+            'id',
+            'username',
+            'email',
+            'last_login',
+            'date_joined'
         ]
