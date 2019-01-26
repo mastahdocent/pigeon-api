@@ -1,19 +1,27 @@
 from django.db import models
+from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.core.serializers import serialize
 
 User = get_user_model()
 
-# models
-
-
-class LetterQuerySet(models.QuerySet):
-    pass
-
 
 class LetterManager(models.Manager):
-    def get_queryset(self):
-        return LetterQuerySet(self.model, using=self._db)
+    def for_user(self, user):
+        # return only those letters where:
+        # - user is a sender and letter is not deleted
+        # - user is a recipient, letter is not unsent and is not delted
+        return Letter.objects.filter(
+            (
+                Q(sender=user) &
+                Q(sender_deleted=False)
+            ) |
+            (
+                Q(recipient=user) &
+                Q(recipient_deleted=False) &
+                Q(status__in=[Letter.SENT_STATUS, Letter.READ_STATUS])
+            )
+        )
 
 
 class Letter(models.Model):
