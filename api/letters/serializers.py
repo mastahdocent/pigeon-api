@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Letter
 from ..serializers import UserStubSerializer
 
+
 class LetterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Letter
@@ -48,9 +49,10 @@ class LetterSerializer(serializers.ModelSerializer):
             # new item is being created
             if new_status not in [Letter.DRAFT_STATUS, Letter.SENT_STATUS]:
                 raise serializers.ValidationError(
-                        "Selected status is not allowed in current object state")
+                    "Selected status is not allowed in current object state")
 
         return value
+
 
 class LetterGetSerializer(LetterSerializer):
     sender = UserStubSerializer(read_only=True)

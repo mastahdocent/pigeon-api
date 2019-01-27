@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from rest_framework import serializers, status
+from rest_framework import status
 from rest_framework.test import APITestCase
 
 from .models import Letter
@@ -28,6 +28,7 @@ class LetterTests(APITestCase):
         test_recipient.set_password("testpass123")
         test_recipient.save()
         self.test_recipient = test_recipient
+
 
 class LetterCreateTests(LetterTests):
     def test_create_letter_draft(self):
@@ -85,7 +86,7 @@ class LetterCreateTests(LetterTests):
 
         # assert the error message
         self.assertContains(
-            response, 
+            response,
             "status is not allowed",
             count=1,
             status_code=status.HTTP_400_BAD_REQUEST
