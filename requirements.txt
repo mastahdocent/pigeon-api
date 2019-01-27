@@ -1,5 +1,4 @@
 astroid==2.1.0
-autopep8==1.4.3
 certifi==2018.11.29
 chardet==3.0.4
 colorama==0.4.1
@@ -16,9 +15,6 @@ mccabe==0.6.1
 Pillow==5.4.1
 pycodestyle==2.4.0
 PyJWT==1.7.1
-pylint==2.2.2
-pylint-django==2.0.5
-pylint-plugin-utils==0.4
 pytz==2018.9
 requests==2.21.0
 six==1.12.0
