@@ -26,8 +26,12 @@ class LetterSerializer(serializers.ModelSerializer):
 
     def validate_status(self, value):
         #request = self.context["request"]
+        instance = self.instance
         new_status = value
-        prev_status = self.instance.status
+        prev_status = None
+
+        if instance:
+            prev_status = self.instance.status
 
         # status validation depending on current letter state
         if prev_status is not None and new_status is not None:
